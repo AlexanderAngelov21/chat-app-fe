@@ -1,0 +1,32 @@
+<div>
+    <h2>User Search</h2>
+    <input
+      type="text"
+      placeholder="Search users by username or email"
+      [(ngModel)]="searchQuery"
+    />
+    <button (click)="onSearch()">Search</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

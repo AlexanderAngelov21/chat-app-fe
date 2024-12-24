@@ -1,0 +1,22 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div>
+      <label for="username">Username:</label>
+      <input id="username" formControlName="username" type="text" />
+      <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
+        Username is required.
+      </div>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" />
+      <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+        Password is required.
+      </div>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <button type="submit">Login</button>
+    <button type="button" (click)="navigateToRegister()">Back to Register</button>
+  </form>
+</div>

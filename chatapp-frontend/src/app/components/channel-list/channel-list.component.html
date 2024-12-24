@@ -1,0 +1,55 @@
+<div>
+  <h2>Channels</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Owner</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let channel of channels">
+        <td>{{ channel.id }}</td>
+        <td>{{ channel.name }}</td>
+        <td>{{ channel.owner.username }}</td>
+        <td>
+          <button (click)="navigateToEditChannel(channel.id)">Edit</button>
+          <button (click)="deleteChannel(channel.id)">Delete</button>
+          <button (click)="addUserToChannel(channel.id)">Add User</button>
+          <button (click)="viewChannelMembers(channel.id, channel.name)">View Members</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="navigateToCreateChannel()">Create Channel</button>
+</div>
+   <!-- Display channel members -->
+   <div *ngIf="channelMembers.length > 0">
+    <h3>Members of {{ selectedChannelName }}</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of channelMembers">
+          <td>{{ member.userId }}</td>
+          <td>{{ member.username }}</td>
+          <td>{{ member.email }}</td>
+          <td>{{ member.role }}</td>
+          <td>
+            <button (click)="assignAdmin(selectedChannelId, member.userId)">Assign Admin</button>
+            <button (click)="removeUser(selectedChannelId, member.userId)">Remove User</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
