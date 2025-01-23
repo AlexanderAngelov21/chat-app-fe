@@ -138,4 +138,11 @@ export class ChannelListComponent implements OnInit {
   navigateToEditChannel(channelId: number): void {
     this.router.navigate([`/edit-channel/${channelId}`]);
   }
+  goToUsers() {
+    this.router.navigate(['/user-list']);
+  }
+  viewMessages(channelId: number): void {
+    this.router.navigate(['/message-box', { channelId }]);
+  }
+  
 }

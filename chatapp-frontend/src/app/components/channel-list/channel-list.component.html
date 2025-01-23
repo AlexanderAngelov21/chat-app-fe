@@ -19,11 +19,13 @@
           <button (click)="deleteChannel(channel.id)">Delete</button>
           <button (click)="addUserToChannel(channel.id)">Add User</button>
           <button (click)="viewChannelMembers(channel.id, channel.name)">View Members</button>
+          <button (click)="viewMessages(channel.id)">Messages</button>
         </td>
       </tr>
     </tbody>
   </table>
   <button (click)="navigateToCreateChannel()">Create Channel</button>
+  <button (click)="goToUsers()">Go to Users</button>
 </div>
    <!-- Display channel members -->
    <div *ngIf="channelMembers.length > 0">

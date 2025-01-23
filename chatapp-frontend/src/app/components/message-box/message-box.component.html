@@ -1,1 +1,14 @@
-<p>message-box works!</p>
+<div>
+    <h3>Channel Messages</h3>
+    <div *ngFor="let message of messages">
+      <p>
+        <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+        <button *ngIf="canEditOrDeleteMessage(message)" (click)="updateMessage(message.id)">Edit</button>
+        <button *ngIf="canEditOrDeleteMessage(message)" (click)="deleteMessage(message.id)">Delete</button>
+      </p>
+    </div>
+  
+    <textarea [(ngModel)]="newMessage" placeholder="Write your message..."></textarea>
+    <button (click)="sendMessage()">Send</button>
+  </div>
+  

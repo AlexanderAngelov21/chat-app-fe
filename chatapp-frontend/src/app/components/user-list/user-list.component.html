@@ -24,8 +24,10 @@
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
         <td>
-          <button (click)="navigateToEditUser(user.id)">Edit</button>
-          <button (click)="deleteUser(user.id)">Delete</button>
+          <button *ngIf="user.id === loggedInUserId" (click)="navigateToEditUser(user.id)">Edit</button>
+          <button *ngIf="user.id === loggedInUserId" (click)="deleteUser(user.id)">Delete</button>
+          <button *ngIf="user.id !== loggedInUserId && !isFriend(user.id)" (click)="addFriend(user.id)">Add Friend</button>
+          
         </td>
       </tr>
     </tbody>
@@ -34,4 +36,5 @@
 
 <div>
   <button routerLink="/channel-list">Manage Channels</button>
+  <button routerLink="/friends">View Friends</button>
 </div>

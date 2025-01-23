@@ -1,1 +1,22 @@
-<p>friend-list works!</p>
+<h2>Friends</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let friend of friends">
+      <td>{{ friend.id }}</td>
+      <td>{{ friend.username }}</td>
+      <td>{{ friend.email }}</td>
+      <td>
+        <button (click)="navigateToPrivateMessages(friend.id)">Send Message</button>
+        <button (click)="deleteFriend(friend.id)">Remove Friend</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

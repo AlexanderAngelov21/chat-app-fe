@@ -1,3 +1,4 @@
+import { Channel } from './channel';
 export interface Message {
     id: number;
     sender: {
@@ -8,10 +9,7 @@ export interface Message {
       id: number;
       username: string;
     };
-    channel?: {
-      id: number;
-      name: string;
-    };
+    channel?: Channel;
     content: string;
     isActive: boolean;
     createdAt: string; // ISO format date

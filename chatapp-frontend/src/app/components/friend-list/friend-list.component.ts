@@ -1,11 +1,82 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { FriendService } from '../../shared/services/friend.service';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-friend-list',
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './friend-list.component.html',
-  styleUrl: './friend-list.component.css'
+  styleUrls: ['./friend-list.component.css']
 })
-export class FriendListComponent {
+export class FriendListComponent implements OnInit {
+  friends: any[] = [];
+  userId: number = +localStorage.getItem('userId')!;
 
+  constructor(private friendService: FriendService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.loadFriends();
+  }
+
+
+  loadFriends(): void {
+    this.friendService.getFriends(this.userId).subscribe(
+      (data) => {
+        this.friends = data;
+      },
+      (error) => {
+        console.error('Error fetching friends:', error);
+      }
+    );
+  }
+
+
+  addFriend(): void {
+    const input = prompt('Enter the Friend ID to add:');
+    const friendId = input ? +input : null; 
+  
+    if (friendId !== null && !isNaN(friendId)) { 
+      this.friendService.addFriend(this.userId, friendId).subscribe(
+        () => {
+          this.loadFriends();
+        },
+        (error) => {
+          console.error('Error adding friend:', error);
+        }
+      );
+    } else {
+      console.error('Invalid Friend ID entered.');
+    }
+  }
+
+  deleteFriend(friendId: number): void {
+    if (confirm('Are you sure you want to remove this friend?')) {
+      this.friendService.deleteFriend(this.userId, friendId).subscribe(
+        () => {
+          this.loadFriends();
+        },
+        (error) => {
+          console.error('Error deleting friend:', error);
+        }
+      );
+    }
+  }
+
+ 
+  sendPrivateMessage(friendId: number): void {
+    const content = prompt('Enter your message:');
+    if (content) {
+      this.friendService.sendPrivateMessage(this.userId, friendId, content).subscribe(
+        () => {
+          alert('Message sent!');
+        },
+        (error) => {
+          console.error('Error sending message:', error);
+        }
+      );
+    }
+  } navigateToPrivateMessages(friendId: number): void {
+    this.router.navigate(['/private-messages', friendId]);
+  }
 }

@@ -79,9 +79,7 @@ export class UserFormComponent implements OnInit {
           this.router.navigate(['/user-list']);
         },
         (error) => {
-          const errorMessage =
-          error.error?.message || 'Failed to update user. Please try again.';
-        alert(errorMessage); 
+          this.handleError(error);
         }
       );
     } else {
@@ -91,8 +89,7 @@ export class UserFormComponent implements OnInit {
           this.router.navigate(['/user-list']);
         },
         (error) => {
-          console.error('Error creating user:', error);
-          alert('Failed to create user. Please try again.');
+          this.handleError(error);
         }
       );
     }
@@ -100,5 +97,14 @@ export class UserFormComponent implements OnInit {
 
   cancel(): void {
     this.router.navigate(['/user-list']);
+  }
+  private handleError(error: any): void {
+    console.error('Error:', error);
+  
+    let errorMessage = 'An error occurred. Please try again.';
+    if (error.error?.message) {
+      errorMessage = error.error.message; 
+    }
+    alert(errorMessage);
   }
 }

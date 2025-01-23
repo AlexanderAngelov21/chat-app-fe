@@ -21,4 +21,7 @@ export class AppComponent {
     this.authService.logout();
     window.location.reload(); 
   }
+  isOnSearchUsersPage(): boolean {
+    return this.router.url === '/user-list';
+  }
 }
