@@ -1,0 +1,77 @@
+.friends-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .friends-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .friends-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .friends-container th,
+  .friends-container td {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: center;
+  }
+  
+  .friends-container th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .friends-container td button {
+    padding: 0.4rem 0.8rem;
+    margin: 0.2rem;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .friends-container td button.send-message-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .friends-container td button.send-message-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .friends-container td button.remove-friend-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .friends-container td button.remove-friend-btn:hover {
+    background-color: #c82333;
+  }
+  
+  @media (max-width: 768px) {
+    .friends-container {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  
+    .friends-container table {
+      font-size: 0.8rem;
+    }
+  
+    .friends-container td button {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.7rem;
+    }
+  }
+  

@@ -1,33 +1,33 @@
-<div>
+<div class="user-form-container">
   <h2>{{ isEditMode ? 'Edit User' : 'Create User' }}</h2>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div>
+    <div class="form-group">
       <label for="username">Username:</label>
-      <input id="username" formControlName="username" type="text" />
-      <div *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].touched">
+      <input id="username" formControlName="username" type="text" class="input-field" />
+      <div *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].touched" class="error-message">
         Username must be at least 3 characters long.
       </div>
     </div>
 
-    <div>
+    <div class="form-group">
       <label for="email">Email:</label>
-      <input id="email" formControlName="email" type="email" />
-      <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+      <input id="email" formControlName="email" type="email" class="input-field" />
+      <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched" class="error-message">
         A valid email is required.
       </div>
     </div>
 
-    <div>
+    <div class="form-group">
       <label for="password">Password:</label>
-      <input id="password" formControlName="password" type="password" />
-      <div *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+      <input id="password" formControlName="password" type="password" class="input-field" />
+      <div *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched" class="error-message">
         Password must be at least 6 characters long.
       </div>
     </div>
 
-    <div>
-      <button type="submit">{{ isEditMode ? 'Update User' : 'Create User' }}</button>
-      <button type="button" (click)="cancel()">Cancel</button>
+    <div class="button-group">
+      <button type="submit" class="btn-submit">{{ isEditMode ? 'Update User' : 'Create User' }}</button>
+      <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
     </div>
   </form>
 </div>

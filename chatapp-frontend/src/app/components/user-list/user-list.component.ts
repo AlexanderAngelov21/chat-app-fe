@@ -97,7 +97,7 @@ export class UserListComponent implements OnInit {
     this.friendService.addFriend(this.loggedInUserId!, friendId).subscribe(
       () => {
         alert('Friend added successfully!');
-        this.fetchUsersAndFriends(); // Refresh the user and friends list
+        this.fetchUsersAndFriends(); 
       },
       (error) => {
         console.error('Error adding friend:', error);

@@ -1,0 +1,95 @@
+.register-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+  
+  .register-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .register-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  .register-container .input-field {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  .register-container .input-field:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  .register-container .error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: -0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .register-container .btn-submit {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .register-container .btn-submit:hover {
+    background-color: #218838;
+  }
+  
+  .register-container .btn-alternate {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .register-container .btn-alternate:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .register-container {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  
+    .register-container h2 {
+      font-size: 1.2rem;
+    }
+  
+    .register-container .btn-submit,
+    .register-container .btn-alternate {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  

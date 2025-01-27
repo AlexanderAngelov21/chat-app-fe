@@ -1,0 +1,109 @@
+.messages-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .messages-container h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .message {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .message p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .message strong {
+    color: #007bff;
+  }
+  
+  .message button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .message button.edit-btn {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .message button.edit-btn:hover {
+    background-color: #e0a800;
+  }
+  
+  .message button.delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .message button.delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .message-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  
+  .message-input textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  .message-input textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  .message-input .send-btn {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  
+  .message-input .send-btn:hover {
+    background-color: #218838;
+  }
+  
+  @media (max-width: 768px) {
+    .messages-container {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  
+    .message-input textarea {
+      height: 80px;
+    }
+  
+    .message-input .send-btn {
+      font-size: 0.9rem;
+    }
+  }
+  

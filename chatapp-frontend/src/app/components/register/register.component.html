@@ -1,34 +1,33 @@
-<div>
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-      <div>
-        <label for="username">Username:</label>
-        <input id="username" formControlName="username" type="text" />
-        <div *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
-          Username is required.
-        </div>
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <div>
+      <label for="username">Username:</label>
+      <input id="username" formControlName="username" type="text" class="input-field" />
+      <div *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched" class="error-message">
+        Username is required.
       </div>
-  
-      <div>
-        <label for="email">Email:</label>
-        <input id="email" formControlName="email" type="email" />
-        <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
-          A valid email is required.
-        </div>
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email" type="email" class="input-field" />
+      <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched" class="error-message">
+        A valid email is required.
       </div>
-  
-      <div>
-        <label for="password">Password:</label>
-        <input id="password" formControlName="password" type="password" />
-        <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
-          Password is required and must be at least 6 characters long.
-        </div>
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" formControlName="password" type="password" class="input-field" />
+      <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched" class="error-message">
+        Password is required and must be at least 6 characters long.
       </div>
-  
-      <div>
-        <button type="submit">Register</button>
-        <button type="button" (click)="navigateToLogin()">Already Registered? Log in</button>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+
+    <div>
+      <button type="submit" class="btn-submit">Register</button>
+      <button type="button" class="btn-alternate" (click)="navigateToLogin()">Already Registered? Log in</button>
+    </div>
+  </form>
+</div>

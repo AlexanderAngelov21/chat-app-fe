@@ -3,20 +3,20 @@
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div>
       <label for="username">Username:</label>
-      <input id="username" formControlName="username" type="text" />
-      <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
+      <input id="username" formControlName="username" type="text" class="input-field" />
+      <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched" class="error-message">
         Username is required.
       </div>
     </div>
     <div>
       <label for="password">Password:</label>
-      <input id="password" formControlName="password" type="password" />
-      <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+      <input id="password" formControlName="password" type="password" class="input-field" />
+      <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="error-message">
         Password is required.
       </div>
     </div>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    <button type="submit">Login</button>
-    <button type="button" (click)="navigateToRegister()">Back to Register</button>
+    <button type="submit" class="btn-submit">Login</button>
+    <button type="button" class="btn-alternate" (click)="navigateToRegister()">Back to Register</button>
   </form>
 </div>

@@ -1,0 +1,119 @@
+.user-container {
+  padding: 0.5rem;
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.user-container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.user-container input {
+  width: 60%;
+  padding: 0.3rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.user-container button {
+  padding: 0.3rem 0.6rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.user-container button:hover {
+  background-color: #0056b3;
+}
+
+.user-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  table-layout: fixed;
+  font-size: 0.9rem;
+}
+
+.user-container th,
+.user-container td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.user-container th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.user-container td {
+  text-align: center;
+}
+
+.user-container td button {
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.2rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.user-container td button.edit {
+  background-color: #ffc107;
+  color: white;
+}
+
+.user-container td button.edit:hover {
+  background-color: #e0a800;
+}
+
+.user-container td button.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.user-container td button.delete:hover {
+  background-color: #c82333;
+}
+
+.user-container td button.add-friend {
+  background-color: #28a745;
+  color: white;
+}
+
+.user-container td button.add-friend:hover {
+  background-color: #218838;
+}
+
+.header-container {
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-container button,
+.header-container a {
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+}
+
+.manage-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.manage-buttons button {
+  margin-left: 0.5rem;
+}

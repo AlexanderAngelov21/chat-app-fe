@@ -1,18 +1,17 @@
-<div>
-    <h2>{{ isEditMode ? 'Edit Channel' : 'Create Channel' }}</h2>
-    <form [formGroup]="channelForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="name">Channel Name:</label>
-        <input id="name" formControlName="name" type="text" />
-        <div *ngIf="channelForm.controls['name'].invalid && channelForm.controls['name'].touched">
-          Channel name is required.
-        </div>
+<div class="channel-form-container">
+  <h2>{{ isEditMode ? 'Edit Channel' : 'Create Channel' }}</h2>
+  <form [formGroup]="channelForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Channel Name:</label>
+      <input id="name" formControlName="name" type="text" class="input-field" />
+      <div *ngIf="channelForm.controls['name'].invalid && channelForm.controls['name'].touched" class="error-message">
+        Channel name is required.
       </div>
-  
-      <div>
-        <button type="submit">{{ isEditMode ? 'Update Channel' : 'Create Channel' }}</button>
-        <button type="button" (click)="cancel()">Cancel</button>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn-submit">{{ isEditMode ? 'Update Channel' : 'Create Channel' }}</button>
+      <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-<div>
+<div class="channel-container">
   <h2>Channels</h2>
   <table>
     <thead>
@@ -15,20 +15,49 @@
         <td>{{ channel.name }}</td>
         <td>{{ channel.owner.username }}</td>
         <td>
-          <button (click)="navigateToEditChannel(channel.id)">Edit</button>
-          <button (click)="deleteChannel(channel.id)">Delete</button>
-          <button (click)="addUserToChannel(channel.id)">Add User</button>
-          <button (click)="viewChannelMembers(channel.id, channel.name)">View Members</button>
-          <button (click)="viewMessages(channel.id)">Messages</button>
+          <button
+            class="edit"
+            *ngIf="isOwnerOrAdmin(channel.id)"
+            (click)="navigateToEditChannel(channel.id)"
+          >
+            Edit
+          </button>
+          <button
+            class="delete"
+            *ngIf="isOwner(channel.id)"
+            (click)="deleteChannel(channel.id)"
+          >
+            Delete
+          </button>
+          <button
+            class="add-user"
+            *ngIf="isOwnerOrAdmin(channel.id)"
+            (click)="addUserToChannel(channel.id)"
+          >
+            Add User
+          </button>
+          <button
+            class="view-members"
+            (click)="viewChannelMembers(channel.id, channel.name)"
+          >
+            View Members
+          </button>
+          <button
+            class="view-messages"
+            (click)="viewMessages(channel.id)"
+          >
+            Messages
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button (click)="navigateToCreateChannel()">Create Channel</button>
-  <button (click)="goToUsers()">Go to Users</button>
-</div>
-   <!-- Display channel members -->
-   <div *ngIf="channelMembers.length > 0">
+  <button class="create-channel" (click)="navigateToCreateChannel()">
+    Create Channel
+  </button>
+  <button class="go-to-users" (click)="goToUsers()">Go to Users</button>
+
+  <div *ngIf="channelMembers.length > 0">
     <h3>Members of {{ selectedChannelName }}</h3>
     <table>
       <thead>
@@ -47,11 +76,23 @@
           <td>{{ member.email }}</td>
           <td>{{ member.role }}</td>
           <td>
-            <button (click)="assignAdmin(selectedChannelId, member.userId)">Assign Admin</button>
-            <button (click)="removeUser(selectedChannelId, member.userId)">Remove User</button>
+            <button
+              class="assign-admin"
+              *ngIf="isOwner(selectedChannelId)"
+              (click)="assignAdmin(selectedChannelId, member.userId)"
+            >
+              Assign Admin
+            </button>
+            <button
+              class="remove-user"
+              *ngIf="isOwnerOrAdmin(selectedChannelId)"
+              (click)="removeUser(selectedChannelId, member.userId)"
+            >
+              Remove User
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-
+</div>

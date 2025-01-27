@@ -1,5 +1,4 @@
-<div>
-
+<div class="user-container">
   <div>
     <input
       type="text"
@@ -24,17 +23,15 @@
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
         <td>
-          <button *ngIf="user.id === loggedInUserId" (click)="navigateToEditUser(user.id)">Edit</button>
-          <button *ngIf="user.id === loggedInUserId" (click)="deleteUser(user.id)">Delete</button>
-          <button *ngIf="user.id !== loggedInUserId && !isFriend(user.id)" (click)="addFriend(user.id)">Add Friend</button>
-          
+          <button class="edit" *ngIf="user.id === loggedInUserId" (click)="navigateToEditUser(user.id)">Edit</button>
+          <button class="delete" *ngIf="user.id === loggedInUserId" (click)="deleteUser(user.id)">Delete</button>
+          <button class="add-friend" *ngIf="user.id !== loggedInUserId && !isFriend(user.id)" (click)="addFriend(user.id)">Add Friend</button>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
-
-<div>
-  <button routerLink="/channel-list">Manage Channels</button>
-  <button routerLink="/friends">View Friends</button>
+  <div class="manage-buttons">
+    <button routerLink="/channel-list">Manage Channels</button>
+    <button routerLink="/friends">View Friends</button>
+  </div>
 </div>

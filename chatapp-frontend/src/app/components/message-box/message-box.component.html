@@ -1,14 +1,15 @@
-<div>
-    <h3>Channel Messages</h3>
-    <div *ngFor="let message of messages">
-      <p>
-        <strong>{{ message.sender.username }}:</strong> {{ message.content }}
-        <button *ngIf="canEditOrDeleteMessage(message)" (click)="updateMessage(message.id)">Edit</button>
-        <button *ngIf="canEditOrDeleteMessage(message)" (click)="deleteMessage(message.id)">Delete</button>
-      </p>
-    </div>
-  
-    <textarea [(ngModel)]="newMessage" placeholder="Write your message..."></textarea>
-    <button (click)="sendMessage()">Send</button>
+<div class="messages-container">
+  <h3>{{ receiverId ? 'Private Messages' : 'Channel Messages' }}</h3>
+  <div class="message" *ngFor="let message of messages">
+    <p>
+      <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+      <button class="edit-btn" *ngIf="canEditOrDeleteMessage(message)" (click)="updateMessage(message.id)">Edit</button>
+      <button class="delete-btn" *ngIf="canEditOrDeleteMessage(message)" (click)="deleteMessage(message.id)">Delete</button>
+    </p>
   </div>
-  
+
+  <div class="message-input">
+    <textarea [(ngModel)]="newMessage" placeholder="Write your message..."></textarea>
+    <button class="send-btn" (click)="sendMessage()">Send</button>
+  </div>
+</div>

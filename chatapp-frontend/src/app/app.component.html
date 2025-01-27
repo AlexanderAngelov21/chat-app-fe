@@ -1,8 +1,8 @@
-<div *ngIf="isAuthenticated()">
-  <button (click)="logout()">Logout</button>
-</div>
-<div *ngIf="isAuthenticated() && isOnSearchUsersPage()">
-  <a routerLink="/search-users">Search Users</a>
+<div class="header-container">
+  <div *ngIf="isAuthenticated()" class="auth-buttons">
+    <button class="btn logout-btn" (click)="logout()">Logout</button>
+ 
+  </div>
 </div>
 
 <router-outlet></router-outlet>

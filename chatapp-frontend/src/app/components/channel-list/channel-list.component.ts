@@ -3,7 +3,7 @@ import { ChannelService } from '../../shared/services/channel.service';
 import { Channel } from '../../shared/models/channel';
 import { Router } from '@angular/router';
 import { CommonModule, NgFor } from '@angular/common';
-
+import { UserService } from '../../shared/services/user.service'; 
 @Component({
   selector: 'app-channel-list',
   standalone: true,
@@ -15,11 +15,14 @@ export class ChannelListComponent implements OnInit {
   channels: Channel[] = []; 
   channelMembers: any[] = []; 
   selectedChannelName: string = ''; 
+  users: { id: number; username: string }[] = []; 
   selectedChannelId!: number;
-  constructor(private channelService: ChannelService, private router: Router) {}
+  userRoleMap: { [channelId: number]: string } = {};
+  constructor(private channelService: ChannelService,private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchUserChannels();
+    this.fetchAllUsers();
   }
 
   fetchUserChannels(): void {
@@ -32,6 +35,9 @@ export class ChannelListComponent implements OnInit {
     this.channelService.getUserChannels(userId).subscribe(
       (data) => {
         this.channels = data;
+        this.channels.forEach((channel) => {
+          this.getUserRoleInChannel(channel.id); 
+        });
       },
       (error) => {
         console.error('Error fetching user channels:', error);
@@ -39,9 +45,36 @@ export class ChannelListComponent implements OnInit {
       }
     );
   }
+  getUserRoleInChannel(channelId: number): void {
+    const userId = +localStorage.getItem('userId')!;
+    this.channelService.getChannelMembers(channelId).subscribe((members) => {
+      const user = members.find((member) => member.userId === userId);
+      if (user) {
+        this.userRoleMap[channelId] = user.role;
+      }
+    });
+  }
+  isOwner(channelId: number): boolean {
+    return this.userRoleMap[channelId] === 'OWNER';
+  }
 
+  isOwnerOrAdmin(channelId: number): boolean {
+    const role = this.userRoleMap[channelId];
+    return role === 'OWNER' || role === 'ADMIN';
+  }
+  fetchAllUsers(): void {
+    this.userService.getAllUsers().subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+        alert('Failed to fetch users.');
+      }
+    );
+  }
   deleteChannel(channelId: number): void {
-    const ownerId = localStorage.getItem('userId') || ''; // Fetch the current logged-in user's ID
+    const ownerId = localStorage.getItem('userId') || ''; 
     if (confirm('Are you sure you want to delete this channel?')) {
       this.channelService.deleteChannel(channelId, ownerId).subscribe(
         () => {
@@ -58,23 +91,34 @@ export class ChannelListComponent implements OnInit {
     }
   }
   addUserToChannel(channelId: number): void {
-    const actorId = localStorage.getItem('userId'); 
-    const userId = prompt('Enter the User ID to add:'); 
-    if (!actorId || !userId) {
-      alert('Actor ID and User ID are required.');
+    const username = prompt('Enter the username to add:');
+    if (!username) {
+      alert('Username is required.');
       return;
     }
 
-    this.channelService.addUserToChannel(channelId, actorId, +userId).subscribe(
+    const user = this.users.find(
+      (u) => u.username.toLowerCase() === username.toLowerCase()
+    );
+    if (!user) {
+      alert('User not found.');
+      return;
+    }
+
+    const actorId = localStorage.getItem('userId');
+    if (!actorId) {
+      alert('Actor ID is required.');
+      return;
+    }
+
+    this.channelService.addUserToChannel(channelId, actorId, user.id).subscribe(
       () => {
         alert('User added to channel successfully!');
         this.viewChannelMembers(channelId, this.selectedChannelName || '');
       },
       (error) => {
         console.error('Error adding user to channel:', error);
-        const errorMessage =
-          error.error?.message || 'Failed to add user. Please try again.';
-        alert(errorMessage);
+        alert('Failed to add user. Please try again.');
       }
     );
   }
