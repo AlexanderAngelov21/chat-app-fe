@@ -188,5 +188,7 @@ export class ChannelListComponent implements OnInit {
   viewMessages(channelId: number): void {
     this.router.navigate(['/message-box', { channelId }]);
   }
-  
+  navigateToUserList(channelId: number): void {
+    this.router.navigate(['/user-list', { channelId }]);
+  }
 }

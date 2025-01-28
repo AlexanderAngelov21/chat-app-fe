@@ -2,6 +2,8 @@
   <h3>{{ receiverId ? 'Private Messages' : 'Channel Messages' }}</h3>
   <div class="message" *ngFor="let message of messages">
     <p>
+      <span class="timestamp">({{ message.createdAt | date: 'dd.MM.yyyy HH:mm' }}) </span>
+
       <strong>{{ message.sender.username }}:</strong> {{ message.content }}
       <button class="edit-btn" *ngIf="canEditOrDeleteMessage(message)" (click)="updateMessage(message.id)">Edit</button>
       <button class="delete-btn" *ngIf="canEditOrDeleteMessage(message)" (click)="deleteMessage(message.id)">Delete</button>

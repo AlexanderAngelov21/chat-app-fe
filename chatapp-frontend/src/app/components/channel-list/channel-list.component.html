@@ -32,7 +32,7 @@
           <button
             class="add-user"
             *ngIf="isOwnerOrAdmin(channel.id)"
-            (click)="addUserToChannel(channel.id)"
+            (click)="navigateToUserList(channel.id)"
           >
             Add User
           </button>

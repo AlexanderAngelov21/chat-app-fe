@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
 
     this.http.post('http://localhost:8080/api/auth/register', userData, { responseType: 'text' }).subscribe(
       (response: string) => {
-        alert(response); // Show the success or failure message from the backend
+        alert(response); 
         this.router.navigate(['/login']);
       },
       (error) => {

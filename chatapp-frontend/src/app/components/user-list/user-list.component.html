@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr *ngFor="let user of paginatedUsers" (click)="selectUser(user.id, user.username)" class="clickable-row">
         <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
@@ -26,10 +26,18 @@
           <button class="edit" *ngIf="user.id === loggedInUserId" (click)="navigateToEditUser(user.id)">Edit</button>
           <button class="delete" *ngIf="user.id === loggedInUserId" (click)="deleteUser(user.id)">Delete</button>
           <button class="add-friend" *ngIf="user.id !== loggedInUserId && !isFriend(user.id)" (click)="addFriend(user.id)">Add Friend</button>
+          <button  class="send-message" *ngIf="user.id !== loggedInUserId" (click)="sendMessage(user.id)">Send Message</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span> Page {{ currentPage }} of {{ totalPages }} </span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
   <div class="manage-buttons">
     <button routerLink="/channel-list">Manage Channels</button>
     <button routerLink="/friends">View Friends</button>
