@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string | null = null; // Add this property
+  errorMessage: string | null = null; 
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +40,12 @@ export class LoginComponent {
         this.router.navigate(['user-list']); 
       },
       error: (err) => {
-        this.errorMessage = err.message || 'Login failed. Please try again.';
+        if (err.status === 401) {
+          
+          this.errorMessage = err.error?.error || 'Invalid username or password';
+        } else {
+          this.errorMessage = 'Login failed. Please try again.';
+        }
       },
     });
     
