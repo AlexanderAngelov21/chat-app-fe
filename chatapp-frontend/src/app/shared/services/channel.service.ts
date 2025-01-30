@@ -51,11 +51,16 @@ export class ChannelService {
     const params = new HttpParams().set('ownerId', ownerId).set('userId', userId.toString());
     return this.http.put<{ message: string }>(url, null, { params });
   }
-
   removeUserFromChannel(channelId: number, actorId: string, userId: number): Observable<{ message: string }> {
     const url = `${this.baseUrl}/${channelId}/removeUser`;
     const params = new HttpParams().set('actorId', actorId).set('userId', userId.toString());
     return this.http.delete<{ message: string }>(url, { params });
   }
+  removeAdmin(channelId: number, ownerId: number, userId: number): Observable<{ message: string }> {
+    const url = `${this.baseUrl}/${channelId}/remove-admin`;
+    const params = new HttpParams().set('ownerId', ownerId.toString()).set('userId', userId.toString());
+    return this.http.put<{ message: string }>(url, null, { params });
+  }
+  
   
 }

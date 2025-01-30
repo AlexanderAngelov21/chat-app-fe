@@ -77,19 +77,28 @@
           <td>{{ member.role }}</td>
           <td>
             <button
-              class="assign-admin"
-              *ngIf="isOwner(selectedChannelId)"
-              (click)="assignAdmin(selectedChannelId, member.userId)"
-            >
-              Assign Admin
-            </button>
-            <button
-              class="remove-user"
-              *ngIf="isOwnerOrAdmin(selectedChannelId)"
-              (click)="removeUser(selectedChannelId, member.userId)"
-            >
-              Remove User
-            </button>
+    class="assign-admin"
+    *ngIf="isOwner(selectedChannelId) && member.role !== 'ADMIN'"
+    (click)="assignAdmin(selectedChannelId, member.userId)"
+  >
+    Assign Admin
+  </button>
+  
+  <button
+    class="remove-admin"
+    *ngIf="isOwner(selectedChannelId) && member.role === 'ADMIN'"
+    (click)="removeAdmin(selectedChannelId, member.userId)"
+  >
+    Remove Admin
+  </button>
+
+  <button
+    class="remove-user"
+    *ngIf="isOwnerOrAdmin(selectedChannelId)"
+    (click)="removeUser(selectedChannelId, member.userId)"
+  >
+    Remove User
+  </button>
           </td>
         </tr>
       </tbody>

@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ChannelService } from '../../shared/services/channel.service';
 import { Channel } from '../../shared/models/channel';
 import { Router } from '@angular/router';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor,NgForOf } from '@angular/common';
 import { UserService } from '../../shared/services/user.service'; 
 @Component({
   selector: 'app-channel-list',
   standalone: true,
-  imports: [CommonModule, NgFor], 
+  imports: [CommonModule, NgFor,NgForOf], 
   templateUrl: './channel-list.component.html',
   styleUrls: ['./channel-list.component.css'],
 })
@@ -145,8 +145,8 @@ export class ChannelListComponent implements OnInit {
   
     this.channelService.assignAdmin(channelId, ownerId, userId).subscribe(
       (response) => {
-        alert(response.message); // Display the response message
-        this.viewChannelMembers(channelId, this.selectedChannelName || ''); // Refresh members
+        alert(response.message);
+        this.viewChannelMembers(channelId, this.selectedChannelName || ''); 
       },
       (error) => {
         console.error('Error assigning admin:', error);
@@ -155,7 +155,31 @@ export class ChannelListComponent implements OnInit {
       }
     );
   }
-  
+  removeAdmin(channelId: number | undefined, userId: number): void {
+    const ownerId = Number(localStorage.getItem('userId'));
+
+    if (!ownerId || !channelId) {
+        alert('Owner ID and Channel ID are required.');
+        return;
+    }
+
+    this.channelService.removeAdmin(channelId, ownerId, userId).subscribe(
+        (response) => {
+            alert(response.message);
+
+            this.channelMembers = this.channelMembers.map((member) => {
+                if (member.userId === userId) {
+                    return { ...member, role: 'MEMBER' }; 
+                }
+                return member;
+            });
+        },
+        (error) => {
+            console.error('Error removing admin:', error);
+            alert(error.error?.message || 'Failed to remove admin.');
+        }
+    );
+}
   removeUser(channelId: number | undefined, userId: number): void {
     const actorId = localStorage.getItem('userId');
     if (!actorId || !channelId) {
