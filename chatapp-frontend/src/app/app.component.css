@@ -1,47 +1,66 @@
-/* General Button Styling */
+
 .btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none; /* For anchor buttons */
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    display: inline-block;
-  }
-  
-  /* Logout Button */
-  .logout-btn {
-    background-color: #dc3545; /* Red */
-    color: white;
-  }
-  
-  .logout-btn:hover {
-    background-color: #c82333;
-  }
-  
-  /* Search Button */
-  .search-btn {
-    background-color: #007bff; /* Blue */
-    color: white;
-    margin-left: 1rem;
-  }
-  
-  .search-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Header Container */
-  .header-container {
-    padding: 1rem;
-    background-color: #f8f9fa; /* Light grey */
-    display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    border-bottom: 1px solid #ddd; /* Add a bottom border */
-  }
-  
-  .auth-buttons {
-    display: flex;
-    gap: 1rem; /* Add spacing between buttons */
-  }
-  
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none; 
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  display: inline-block;
+}
+
+
+.logout-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+
+.search-btn {
+  background-color: #007bff;
+  color: white;
+  margin-left: 1rem;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.header-container {
+  padding: 1rem;
+  background-color: #f8f9fa; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd; 
+}
+
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.chatapp-logo {
+  width: 30px; 
+  height: 30px;
+  margin-right: 10px;
+}
+
+.chatapp-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem; 
+}

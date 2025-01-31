@@ -1,7 +1,10 @@
 <div class="header-container">
+  <div class="logo-container">
+    <img src="/assets/chatapp.png" alt="ChatApp Logo" class="chatapp-logo">
+    <span class="chatapp-title">ChatApp</span>
+  </div>
   <div *ngIf="isAuthenticated()" class="auth-buttons">
     <button class="btn logout-btn" (click)="logout()">Logout</button>
- 
   </div>
 </div>
 
