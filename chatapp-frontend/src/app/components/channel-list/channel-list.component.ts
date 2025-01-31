@@ -13,11 +13,22 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class ChannelListComponent implements OnInit {
   channels: Channel[] = []; 
+  paginatedChannels: Channel[] = [];
   channelMembers: any[] = []; 
   selectedChannelName: string = ''; 
   users: { id: number; username: string }[] = []; 
   selectedChannelId!: number;
   userRoleMap: { [channelId: number]: string } = {};
+
+  totalChannels = 0; 
+  currentPage = 1;
+  itemsPerPage = 5;
+  totalPages = 1; 
+  paginatedMembers: any[] = [];
+  totalMembers = 0;
+  memberPage = 1;
+  membersPerPage = 5;
+  totalMemberPages = 1;
   constructor(private channelService: ChannelService,private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -35,8 +46,12 @@ export class ChannelListComponent implements OnInit {
     this.channelService.getUserChannels(userId).subscribe(
       (data) => {
         this.channels = data;
+        this.totalChannels = this.channels.length;
+        this.totalPages = Math.ceil(this.totalChannels / this.itemsPerPage);
+        this.updatePaginatedChannels();
+
         this.channels.forEach((channel) => {
-          this.getUserRoleInChannel(channel.id); 
+          this.getUserRoleInChannel(channel.id);
         });
       },
       (error) => {
@@ -44,6 +59,17 @@ export class ChannelListComponent implements OnInit {
         alert('Failed to fetch user channels.');
       }
     );
+  }
+  updatePaginatedChannels(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    this.paginatedChannels = this.channels.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePaginatedChannels();
+    }
   }
   getUserRoleInChannel(channelId: number): void {
     const userId = +localStorage.getItem('userId')!;
@@ -79,6 +105,9 @@ export class ChannelListComponent implements OnInit {
       this.channelService.deleteChannel(channelId, ownerId).subscribe(
         () => {
           this.channels = this.channels.filter((channel) => channel.id !== channelId);
+          this.totalChannels = this.channels.length;
+          this.totalPages = Math.ceil(this.totalChannels / this.itemsPerPage);
+          this.updatePaginatedChannels();
           alert('Channel deleted successfully!');
         },
         (error) => {
@@ -90,38 +119,7 @@ export class ChannelListComponent implements OnInit {
       );
     }
   }
-  addUserToChannel(channelId: number): void {
-    const username = prompt('Enter the username to add:');
-    if (!username) {
-      alert('Username is required.');
-      return;
-    }
 
-    const user = this.users.find(
-      (u) => u.username.toLowerCase() === username.toLowerCase()
-    );
-    if (!user) {
-      alert('User not found.');
-      return;
-    }
-
-    const actorId = localStorage.getItem('userId');
-    if (!actorId) {
-      alert('Actor ID is required.');
-      return;
-    }
-
-    this.channelService.addUserToChannel(channelId, actorId, user.id).subscribe(
-      () => {
-        alert('User added to channel successfully!');
-        this.viewChannelMembers(channelId, this.selectedChannelName || '');
-      },
-      (error) => {
-        console.error('Error adding user to channel:', error);
-        alert('Failed to add user. Please try again.');
-      }
-    );
-  }
   viewChannelMembers(channelId: number, channelName: string): void {
     this.selectedChannelId = channelId; 
     this.selectedChannelName = channelName;
@@ -129,12 +127,26 @@ export class ChannelListComponent implements OnInit {
       (members) => {
         this.channelMembers = members;
         this.selectedChannelName = channelName; 
+        this.totalMembers = members.length;
+        this.totalMemberPages = Math.ceil(this.totalMembers / this.membersPerPage);
+        this.updatePaginatedMembers();
       },
       (error) => {
         console.error('Error fetching members:', error);
         alert('Failed to fetch channel members.');
       }
     );
+  }
+  updatePaginatedMembers(): void {
+    const startIndex = (this.memberPage - 1) * this.membersPerPage;
+    this.paginatedMembers = this.channelMembers.slice(startIndex, startIndex + this.membersPerPage);
+  }
+
+  goToMemberPage(page: number): void {
+    if (page >= 1 && page <= this.totalMemberPages) {
+      this.memberPage = page;
+      this.updatePaginatedMembers();
+    }
   }
   assignAdmin(channelId: number | undefined, userId: number): void {
     const ownerId = localStorage.getItem('userId');
@@ -189,8 +201,8 @@ export class ChannelListComponent implements OnInit {
   
     this.channelService.removeUserFromChannel(channelId, actorId, userId).subscribe(
       (response) => {
-        alert(response.message); // Display the response message
-        this.channelMembers = this.channelMembers.filter((member) => member.userId !== userId); // Refresh members
+        alert(response.message); 
+        this.channelMembers = this.channelMembers.filter((member) => member.userId !== userId); 
       },
       (error) => {
         console.error('Error removing user:', error);

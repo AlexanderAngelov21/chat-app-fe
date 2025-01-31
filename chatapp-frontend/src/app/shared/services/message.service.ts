@@ -18,10 +18,9 @@ export class MessageService {
     return this.http.post(url, { content });
   }
 
-  getMessagesFromChannel(channelId: number): Observable<PaginatedResponse<Message>> {
-    return this.http.get<PaginatedResponse<Message>>(
-      `http://localhost:8080/api/messages/channel/${channelId}`
-    );
+  getMessagesFromChannel(channelId: number, page: number, size: number): Observable<PaginatedResponse<Message>> {
+    const url = `http://localhost:8080/api/messages/channel/${channelId}?page=${page}&size=${size}`;
+    return this.http.get<PaginatedResponse<Message>>(url);
   }
 
   getChannelRole(channelId: number, userId: number): Observable<'OWNER' | 'ADMIN' | 'MEMBER' | null> {
@@ -31,8 +30,9 @@ export class MessageService {
     );
   }
   getPrivateMessages(senderId: number, receiverId: number, page: number, size: number): Observable<PaginatedResponse<Message>> {
-    const url = `${this.baseUrl}/friend?senderId=${senderId}&receiverId=${receiverId}&page=${page}&size=${size}`;
-    return this.http.get<PaginatedResponse<Message>>(url);
+    return this.http.get<PaginatedResponse<Message>>(
+      `${this.baseUrl}/friend?senderId=${senderId}&receiverId=${receiverId}&page=${page}&size=${size}`
+    );
   }
   
   sendPrivateMessage(senderId: number, receiverId: number, content: string): Observable<any> {

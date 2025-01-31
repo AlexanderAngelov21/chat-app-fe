@@ -11,8 +11,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class FriendListComponent implements OnInit {
   friends: any[] = [];
+  paginatedFriends: any[] = [];
   userId: number = +localStorage.getItem('userId')!;
 
+  currentPage = 1;
+  itemsPerPage = 5;
+  totalFriends = 0;
+  totalPages = 1;
   constructor(private friendService: FriendService, private router: Router) {}
 
   ngOnInit(): void {
@@ -23,15 +28,26 @@ export class FriendListComponent implements OnInit {
   loadFriends(): void {
     this.friendService.getFriends(this.userId).subscribe(
       (data) => {
-        this.friends = data;
+       this.friends = data;
+        this.totalFriends = this.friends.length;
+        this.totalPages = Math.ceil(this.totalFriends / this.itemsPerPage);
+        this.updatePaginatedFriends();
       },
       (error) => {
         console.error('Error fetching friends:', error);
       }
     );
   }
-
-
+  updatePaginatedFriends(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    this.paginatedFriends = [...this.friends.slice(startIndex, startIndex + this.itemsPerPage)];
+  }
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePaginatedFriends();
+    }
+  }
   addFriend(): void {
     const input = prompt('Enter the Friend ID to add:');
     const friendId = input ? +input : null; 

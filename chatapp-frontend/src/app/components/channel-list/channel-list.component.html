@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let channel of channels">
+      <tr *ngFor="let channel of paginatedChannels">
         <td>{{ channel.id }}</td>
         <td>{{ channel.name }}</td>
         <td>{{ channel.owner.username }}</td>
@@ -52,6 +52,11 @@
       </tr>
     </tbody>
   </table>
+  <div class="pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span> Page {{ currentPage }} of {{ totalPages }} </span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
   <button class="create-channel" (click)="navigateToCreateChannel()">
     Create Channel
   </button>
@@ -70,7 +75,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let member of channelMembers">
+        <tr *ngFor="let member of paginatedMembers">
           <td>{{ member.userId }}</td>
           <td>{{ member.username }}</td>
           <td>{{ member.email }}</td>
@@ -103,5 +108,10 @@
         </tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <button (click)="goToMemberPage(memberPage - 1)" [disabled]="memberPage === 1">Previous</button>
+      <span> Page {{ memberPage }} of {{ totalMemberPages }} </span>
+      <button (click)="goToMemberPage(memberPage + 1)" [disabled]="memberPage === totalMemberPages">Next</button>
+    </div>
   </div>
 </div>

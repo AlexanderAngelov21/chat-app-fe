@@ -12,8 +12,12 @@ export class ChannelService {
 
   constructor(private http: HttpClient) {}
 
-  getAllChannels(): Observable<Channel[]> {
-    return this.http.get<Channel[]>(this.baseUrl);
+  getAllChannels(page: number, size: number): Observable<{ channels: Channel[]; total: number }> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+  
+    return this.http.get<{ channels: Channel[]; total: number }>(this.baseUrl, { params });
   }
 
   getChannelById(channelId: number): Observable<Channel> {

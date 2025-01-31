@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let friend of friends">
+      <tr *ngFor="let friend of paginatedFriends">
         <td>{{ friend.id }}</td>
         <td>{{ friend.username }}</td>
         <td>{{ friend.email }}</td>
@@ -21,4 +21,9 @@
       </tr>
     </tbody>
   </table>
+  <div class="pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span> Page {{ currentPage }} of {{ totalPages }} </span>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
 </div>
